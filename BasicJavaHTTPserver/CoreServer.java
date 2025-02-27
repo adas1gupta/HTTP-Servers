@@ -7,6 +7,16 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
+public interface RequestHandler {
+    Response handle(Request request);
+}
+
+public class HomePageHandler implements RequestHandler {
+    public Response handle(Request request) {
+        return new Response(200, "Welcome to the homepage!");
+    }
+}
+
 class Server {
     private ServerSocket serverSocket;
     public int port; 
@@ -16,7 +26,7 @@ class Server {
     private Map<String, RequestHandler> routeMap = new HashMap<>();
     
     private int maxConnections = 50;
-    private int connectionTimeout = 30000; // 30 seconds
+    private int connectionTimeout = 30000;
     
     public Server(int port) {
         this.port = port;
@@ -26,6 +36,6 @@ class Server {
 
 class Main {
     public static void main() {
-
+        server.routeMap.put("/", new HomePageHandler());
     }
 }
