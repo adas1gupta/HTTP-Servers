@@ -32,10 +32,14 @@ class Server {
         this.port = port;
         this.connectionPool = new Socket[maxConnections]; 
     }
+
+    
 }
 
 class Main {
     public static void main() {
+        Server server = new Server(8080);
         server.routeMap.put("/", new HomePageHandler());
+        server.start();
     }
 }
