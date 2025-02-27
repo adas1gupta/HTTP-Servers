@@ -33,7 +33,20 @@ class Server {
         this.connectionPool = new Socket[maxConnections]; 
     }
 
-    
+    public void start() {
+        if (port) {
+            serverSocket = new ServerSocket(port);
+            running = true;
+            System.out.println("Server started on port " + port);
+
+            while (running) {
+                Socket client = serverSocket.accept();
+
+                //handle client method
+            }
+        }
+    }
+
 }
 
 class Main {
